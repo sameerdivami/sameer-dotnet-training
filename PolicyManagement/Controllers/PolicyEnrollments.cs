@@ -51,7 +51,7 @@ namespace PolicyManagementApp.Controllers
             }
         }
 
-        [HttpGet("{id}", Name = "GetEnrollmentById")]
+        [HttpGet("{userId}", Name = "GetEnrollmentById")]
         public async Task<IActionResult> GetEnrollmentById(int userId)
         {
             var enrollment = await policyEnrollmentService.GetEnrollmentByIdAsync(userId);

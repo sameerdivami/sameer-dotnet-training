@@ -23,8 +23,7 @@ using System.ComponentModel.DataAnnotations;
         [MinLength(8, ErrorMessage = "Password must be at least 8 characters long")]
         public string Password { get; set; } = null!;
 
-        [Required]
-        public string Role { get; set; } = null!;
+        public string Role { get; set; } = "User";
     }
 }
 
