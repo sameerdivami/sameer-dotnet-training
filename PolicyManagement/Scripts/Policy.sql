@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS "Policy" (
+    "Id" SERIAL PRIMARY KEY,
+    "PolicyName" VARCHAR(100) NOT NULL,
+    "PremiumAmount" INTEGER NOT NULL,
+    "Description" TEXT,
+    "IsActive" BOOLEAN DEFAULT false,
+    "CreatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "UpdatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
