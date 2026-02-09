@@ -82,44 +82,6 @@ The API will be available at:
 - HTTPS: `https://localhost:5001`
 - Swagger UI: `http://localhost:5000/swagger`
 
-## 📚 API Endpoints
-
-### Authentication
-
-| Method | Endpoint | Description | Authorization |
-|--------|----------|-------------|---------------|
-| POST | `/api/login` | Authenticate user and get JWT token | Public |
-
-### Users
-
-| Method | Endpoint | Description | Authorization |
-|--------|----------|-------------|---------------|
-| GET | `/api/users` | Get all users | Admin only |
-| GET | `/api/users/{id}` | Get user by ID | Authenticated |
-| POST | `/api/users` | Create new user | Public |
-| PUT | `/api/users/{id}` | Update user | Admin only |
-| DELETE | `/api/users/{id}` | Delete user | Admin only |
-
-### Policies
-
-| Method | Endpoint | Description | Authorization |
-|--------|----------|-------------|---------------|
-| GET | `/api/policies` | Get all policies | Authenticated |
-| GET | `/api/policies/{id}` | Get policy by ID | Authenticated |
-| GET | `/api/policies/search?minAmount=X&maxAmount=Y` | Search policies by amount range | Authenticated |
-| GET | `/api/policies/status?isActive=true` | Get policies by status | Authenticated |
-| POST | `/api/policies` | Create new policy | Admin only |
-| PUT | `/api/policies/{id}` | Update policy | Admin only |
-| DELETE | `/api/policies/{id}` | Delete policy | Admin only |
-
-### Policy Enrollments
-
-| Method | Endpoint | Description | Authorization |
-|--------|----------|-------------|---------------|
-| POST | `/api/policyEnrollment` | Enroll user in policy | Authenticated |
-| PUT | `/api/policyEnrollment/{userId}/{policyId}` | Update enrollment | Admin only |
-| DELETE | `/api/policyEnrollment/{userId}/{policyId}` | Delete enrollment | Admin only |
-| GET | `/api/policyEnrollment/user/{userId}` | Get user's enrollments | Authenticated |
 
 ## 🗄️ Database Schema
 
