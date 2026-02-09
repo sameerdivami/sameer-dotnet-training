@@ -77,10 +77,6 @@ dotnet ef database update
 dotnet run
 ```
 
-The API will be available at:
-- HTTP: `http://localhost:5000`
-- HTTPS: `https://localhost:5001`
-- Swagger UI: `http://localhost:5000/swagger`
 
 
 ## 🗄️ Database Schema
@@ -158,12 +154,28 @@ The application uses JWT (JSON Web Token) for authentication:
    - `User`: Basic access to view and enroll in policies
    - `Admin`: Full access to all operations
 
-## 🧪 Testing with Swagger
+## 🧪 Testing with Postman
 
-1. Navigate to `http://localhost:5078/swagger`
-2. Click "Authorize" button
-3. Enter your JWT token in the format: `Bearer <token>`
-4. Test API endpoints interactively
+1. **Login to get JWT token**:
+   - Method: `POST`
+   - URL: `http://localhost:XXXX/api/login`
+   - Body (JSON):
+     ```json
+     {
+       "email": "user@example.com",
+       "password": "yourpassword"
+     }
+     ```
+   - Copy the token from the response
+
+2. **Use the token for authenticated requests**:
+   - Add to Headers:
+     - Key: `Authorization`
+     - Value: `Bearer <your-token>`
+
+3. **Test endpoints**:
+   - Import the collection or create requests manually
+   - All authenticated endpoints require the Authorization header
 
 ## 📦 Dependencies
 
@@ -206,11 +218,3 @@ This project is part of a .NET training assignment.
 ## 👤 Author
 
 **Sameer Divami**
-
-## 🤝 Contributing
-
-This is a training project. For any suggestions or improvements, please create an issue or pull request.
-
----
-
-**Note**: Remember to update the database connection string and JWT secret key before running the application in production.
