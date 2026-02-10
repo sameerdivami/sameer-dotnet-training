@@ -23,6 +23,7 @@ namespace policyManagementApp
         [HttpGet(Name = "GetPolicies")]
         public async Task<IActionResult> GetAllPolicies()
         {
+            // await Task.Delay(10000, HttpContext.RequestAborted); 
             var policies = await policyService.GetAllPoliciesAsync();
             return Ok(policies);
         }
@@ -51,6 +52,60 @@ namespace policyManagementApp
             var policies = await policyService.GetPoliciesByStatusAsync(isActive);
             return Ok(policies);
         }
+
+        // Test endpoints for middleware exception handling
+        [HttpGet("test-null-ref", Name = "TestNullReference")]
+        public IActionResult TestNullReference()
+        {
+            string? nullString = null;
+            return Ok(nullString.Length); // Throws NullReferenceException
+        }
+
+        [HttpGet("test-arg-null", Name = "TestArgumentNull")]
+        public IActionResult TestArgumentNull()
+        {
+            throw new ArgumentNullException("testParam", "This is a test ArgumentNullException");
+        }
+
+        [HttpGet("test-key-not-found", Name = "TestKeyNotFound")]
+        public IActionResult TestKeyNotFound()
+        {
+            throw new KeyNotFoundException("Test key not found exception");
+        }
+
+        [HttpGet("test-timeout", Name = "TestTimeout")]
+        public IActionResult TestTimeout()
+        {
+            throw new TimeoutException("Test timeout exception");
+        }
+
+        [HttpGet("test-unauthorized", Name = "TestUnauthorized")]
+        public IActionResult TestUnauthorized()
+        {
+            throw new UnauthorizedAccessException("Test unauthorized access exception");
+        }
+
+        [HttpGet("test-http-request", Name = "TestHttpRequest")]
+        public async Task<IActionResult> TestHttpRequest()
+        {
+            using var httpClient = new HttpClient();
+            // This should fail and throw HttpRequestException
+            var response = await httpClient.GetAsync("http://localhost:9999/nonexistent");
+            return Ok();
+        }
+
+        [HttpGet("test-io", Name = "TestIOException")]
+        public IActionResult TestIOException()
+        {
+            throw new IOException("Test IO exception");
+        }
+
+        [HttpGet("test-invalid-op-jwt", Name = "TestInvalidOperationJWT")]
+        public IActionResult TestInvalidOperationJWT()
+        {
+            throw new InvalidOperationException("JWT authentication failed");
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpPost(Name = "CreatePolicy")]
         public async Task<IActionResult> CreatePolicy([FromBody] CreatePolicyDto policy)
